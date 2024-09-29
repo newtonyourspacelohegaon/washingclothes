@@ -17,6 +17,10 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+    return render_template('index.html')
+
+@app.route('/book.html')
+def booking():
     return render_template('book.html')
 
 @app.route('/get_available_slots')
