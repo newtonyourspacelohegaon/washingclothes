@@ -1,4 +1,4 @@
-Flask==3.0.3
-pymongo==3.11.0
-requests==2.32.3
+Flask
+pymongo
+requests
 gunicorn==19.7.1
