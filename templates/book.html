@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <script>
+        // JavaScript to validate the date field immediately upon selection
+        async function checkDate() {
+            const dateField = document.getElementById("date");
+            const selectedDate = new Date(dateField.value);
+            const today = new Date();
+
+            if (selectedDate < today.setHours(0, 0, 0, 0)) {
+                alert("Error: You cannot select a past date.");
+                dateField.value = ""; // Clear the date field
+                return;
+            }
+            const isoDate = selectedDate.toISOString().split('T')[0];
+
+    // Fetch available time slots from the server with the ISO formatted date
+            const response = await fetch(`/get_available_slots?date=${isoDate}`);
+
+            // const response = await fetch(`/get_available_slots?date=${selectedDate}`);
+            const availableSlots = await response.json();
+            
+            const label = document.createElement("label");
+            label.innerText = `Time Slot:`;
+            label.id = "timel";
+                
+            const input = document.createElement("select");
+            input.id = "time";
+            input.name = "time";
+            input.style = "width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #ccc;"
+            
+            const existingLabel = document.getElementById("timel");
+            if (existingLabel) {
+                existingLabel.remove();
+            }
+            const existingSelect = document.getElementById("time");
+            if (existingSelect) {
+                existingSelect.remove();
+            }
+                
+                
+            availableSlots.forEach(function(slot) {
+                const option = document.createElement("option");
+                option.value = slot;
+                option.textContent = slot;
+                input.appendChild(option); 
+            });
+                
+            // Insert the new label after the date input
+            dateField.parentNode.insertBefore(input, dateField.nextSibling);
+            dateField.parentNode.insertBefore(label, dateField.nextSibling);
+            
+            // console.
+        
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+    <header>
+        <h1 style="color: black;">
+            <a href="./index.html">Machine Booking</a>
+        </h1>
+        <nav>
+            <ul>
+                <li><a href="./newUser.html">Create User Name</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="featured-projects">
+        <h2>Booking's Credentials</h2>
+        <form action="/action_page.php" method="POST" style="max-width: 400px; margin: 0 auto; padding: 20px; background-color: #f4f4f4; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <label for="name" style="font-size: 1.2em; margin-bottom: 10px; display: block;">User ID:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your User Id" style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #ccc;"><br>
+            <label for="floor" style="font-size: 1.2em; margin-bottom: 10px; display: block;">Floor No:</label>
+            <select id="floor" name="floor" style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #ccc;">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select><br>
+
+            <label for="room" style="font-size: 1.2em; margin-bottom: 10px; display: block;">Room No:</label>
+            <input type="text" id="room" name="room" placeholder="Enter your room number" style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #ccc;"><br>
+            
+            <label for="date" style="font-size: 1.2em; margin-bottom: 10px;">Date:</label><br>
+            <input type="date" id="date" name="date" required onchange="checkDate()" style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #ccc;"><br><br>
+
+
+            <input type="submit" value="Submit" style="width: 100%; padding: 12px; background-color: #0073e6; color: white; border: none; border-radius: 5px; font-size: 1.2em; cursor: pointer;">
+            <p style="font-size: min(0.90em, 18px); text-align: left;display: inline;">Don't have the username</p>
+            <p style="font-size: min(1.00em, 20px);text-align: right;display: inline;"><a href="newUser.html" style="color: rgb(0, 94, 255);">Create Account</a></p>
+        </form>
+    </section>
+</div>
+    <footer>
+        <p>&copy; Washing machine slot booking.</p>
+        <p>Made by section "A" floor 1</p>
+        <div class="social-links">
+            <a href="#">Facebook</a>
+            <a href="#">Twitter</a>
+            <a href="#">LinkedIn</a>
+        </div>
+    </footer>
+</body>
+
+</html>

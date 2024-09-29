@@ -1,0 +1,123 @@
+/* Ensure body and html fill the screen */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ensure the content container grows to take available space */
+.container {
+    flex: 1;
+}
+
+/* Make sure footer sticks to the bottom of the screen */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0 10px 0;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+}
+
+/* Footer links styling */
+.social-links a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.social-links a:hover {
+    text-decoration: underline;
+}
+
+/* Basic content styling */
+section.hero {
+    padding: 25px;
+    margin: 2px 0;
+}
+
+/* Additional styling from original CSS */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    position: relative;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+}
+
+nav ul li:hover > a {
+    background-color: #555;
+}
+
+.hero {
+    background: #0073e6;
+    color: #fff;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.hero .btn {
+    margin: 10px;
+    padding: 10px 20px;
+    background: #fff;
+    color: #0073e6;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.featured-projects, .upcoming-events {
+    padding: 20px;
+}
+
+/* Form alignment */
+form {
+    align-items: center;
+    text-align: center;
+    padding: 10%;
+    font-size: 3.5vw;
+}
+
+/* Image scaling */
+img {
+    max-width: 100%;
+}
+
+/* Square box */
+.square {
+    height: 75px;
+    width: 75px;
+}
