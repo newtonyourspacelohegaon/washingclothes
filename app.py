@@ -68,10 +68,6 @@ def handle_form():
         print("Insertion failed: 'user_id' must be unique")
     return f"Form submitted successfully!<br>First Name: {first_name}<br>Last Name: {dateSelect}<br>Floor: {timeSelect}"
 
-if __name__ == '__main__':
-    app.run(debug=True,port=5500)
-
-
 
 
 
