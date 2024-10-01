@@ -64,13 +64,13 @@ def handle_form():
     'dateSelect': dateSelect,
     'timeSelect': timeSelect 
     }
-
+    result = ""
     try:
         result = collection.insert_one(data)
         print(f"Document inserted with ID: {result.inserted_id}")
     except errors.DuplicateKeyError:
         print("Insertion failed: 'user_id' must be unique")
-    return f"Form submitted successfully!<br>First Name: {first_name}<br>Last Name: {dateSelect}<br>Floor: {timeSelect}"
+    return f"Form submitted successfully!<br>First Name: {first_name}<br>Last Name: {dateSelect}<br>Floor: {timeSelect}<br>Document inserted with ID: {result}"
 
 
 
