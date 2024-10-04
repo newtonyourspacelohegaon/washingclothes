@@ -65,28 +65,6 @@ def handle_form():
     if collection.find_one({"dateSelect": dateSelect, "timeSelect": timeSelect}):
         return "Error: Time slot already booked."
     
-    data = {
-    'user_id': first_name,
-    'dateSelect': dateSelect,
-    'timeSelect': timeSelect 
-    }
-    result = ""
-    try:
-        result = collection.insert_one(data)
-        print(f"Document inserted with ID: {result.inserted_id}")
-    except errors.DuplicateKeyError:
-        print("Insertion failed: 'user_id' must be unique")
-    return f"Form submitted successfully!<br>First Name: {first_name}<br>Last Name: {dateSelect}<br>Floor: {timeSelect}<br>Document inserted with ID: {result}"
-
-@app.route('/action_page.php', methods=['POST'])
-def handle_form():
-    first_name = request.form.get('name')
-    dateSelect = request.form.get('date')
-    timeSelect = request.form.get('time')
-
-    if collection.find_one({"dateSelect": dateSelect, "timeSelect": timeSelect}):
-        return "Error: Time slot already booked."
-    
     original_date = datetime.strptime(dateSelect, "%Y-%m-%d")
 
     new_date = original_date + timedelta(days=4)
