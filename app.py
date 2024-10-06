@@ -96,7 +96,7 @@ def handle_form():
             {'user_id': first_name},
             {'$set': data}
         )
-            return (f"Document inserted with ID: {result}")
+            return (f"Document inserted ID: {first_name}")
     except errors.DuplicateKeyError:
         return ("Insertion failed: 'user_id' must be unique")
     return f"Form submitted successfully!<br>First Name: {first_name}<br>Last Name: {dateSelect}<br>Floor: {timeSelect}<br>{result}"
