@@ -77,7 +77,7 @@ def handle_form():
     'timeSelect': timeSelect,
     'resetDate':new_date.strftime("%Y-%m-%d")
     }
-
+    str_new_date = new_date.strftime("%Y-%m-%d")
     try:
         if collection.find_one({"user_id": first_name,"resetDate":{"$exists": True}}):
             if datetime.today() >= datetime.strptime(collection.find({"user_id": first_name})[0]["resetDate"],"%Y-%m-%d"):
@@ -85,7 +85,7 @@ def handle_form():
                     {'user_id': first_name},
                     {'$set': data}
                 )
-                return (f"Document updated ID: {first_name} you can book after {new_date.strftime("%Y-%m-%d")},you have booked the slot for{timeSelect} on {DateSelect}")
+                return (f"Document updated ID: {first_name} you can book after {str_new_date},you have booked the slot for{timeSelect} on {DateSelect}")
             else:
                 tempDateSelect=collection.find({"user_id": first_name})[0]["resetDate"]
                 tempDateBooked = collection.find({"user_id": first_name})[0]["dateSelect"]
@@ -96,7 +96,7 @@ def handle_form():
             {'user_id': first_name},
             {'$set': data}
         )
-            return (f"Document updated ID: {first_name} you can book after {new_date.strftime("%Y-%m-%d")},you have booked the slot for{timeSelect} on {DateSelect}")
+            return (f"Document updated ID: {first_name} you can book after {str_new_date},you have booked the slot for{timeSelect} on {DateSelect}")
     except errors.DuplicateKeyError:
         return ("Insertion failed: 'user_id' must be unique")
     return f"Sometingh unexpected happened"
