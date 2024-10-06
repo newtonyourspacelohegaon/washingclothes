@@ -85,7 +85,7 @@ def handle_form():
                     {'user_id': first_name},
                     {'$set': data}
                 )
-                return (f"Document updated with ID: {result}")
+                return (f"Document updated ID: {first_name} you can book after {new_date.strftime("%Y-%m-%d")},you have booked the slot for{timeSelect} on {DateSelect}")
             else:
                 tempDateSelect=collection.find({"user_id": first_name})[0]["resetDate"]
                 tempDateBooked = collection.find({"user_id": first_name})[0]["dateSelect"]
@@ -96,10 +96,10 @@ def handle_form():
             {'user_id': first_name},
             {'$set': data}
         )
-            return (f"Document inserted ID: {first_name}")
+            return (f"Document updated ID: {first_name} you can book after {new_date.strftime("%Y-%m-%d")},you have booked the slot for{timeSelect} on {DateSelect}")
     except errors.DuplicateKeyError:
         return ("Insertion failed: 'user_id' must be unique")
-    return f"Form submitted successfully!<br>First Name: {first_name}<br>Last Name: {dateSelect}<br>Floor: {timeSelect}<br>{result}"
+    return f"Sometingh unexpected happened"
 
 @app.route('/sign_up.php', methods=['POST'])
 def handle_sign():
