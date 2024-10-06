@@ -64,6 +64,9 @@ def handle_form():
 
     if collection.find_one({"dateSelect": dateSelect, "timeSelect": timeSelect}):
         return "Error: Time slot already booked."
+    nam = collection.find_one({"user_id": first_name})
+    if not nam:
+        return "User Name not in database"
     
     original_date = datetime.strptime(dateSelect, "%Y-%m-%d")
 
@@ -77,12 +80,12 @@ def handle_form():
 
     try:
         if collection.find_one({"user_id": first_name,"resetDate":{"$exists": True}}):
-            if datetime.today()>=datetime.strptime(collection.find({"user_id": first_name})[0]["resetDate"],"%Y-%m-%d"):
+            if datetime.today() >= datetime.strptime(collection.find({"user_id": first_name})[0]["resetDate"],"%Y-%m-%d"):
                 result = collection.update_one(
                     {'user_id': first_name},
                     {'$set': data}
                 )
-                print(f"Document inserted with ID: {result}")
+                return (f"Document updated with ID: {result}")
             else:
                 tempDateSelect=collection.find({"user_id": first_name})[0]["resetDate"]
                 tempDateBooked = collection.find({"user_id": first_name})[0]["dateSelect"]
@@ -93,9 +96,9 @@ def handle_form():
             {'user_id': first_name},
             {'$set': data}
         )
-            print(f"Document inserted with ID: {result}")
+            return (f"Document inserted with ID: {result}")
     except errors.DuplicateKeyError:
-        print("Insertion failed: 'user_id' must be unique")
+        return ("Insertion failed: 'user_id' must be unique")
     return f"Form submitted successfully!<br>First Name: {first_name}<br>Last Name: {dateSelect}<br>Floor: {timeSelect}<br>{result}"
 
 @app.route('/sign_up.php', methods=['POST'])
