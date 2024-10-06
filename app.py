@@ -109,7 +109,8 @@ def handle_sign():
 
     if collection.find_one({"user_id": first_name}):
         return "Error: The User Already Exist."
-    
+    if first_name[0:4]!="2024":
+        return "Invalid URN number"
     data = {
     'user_id': first_name,
     'floor': hostelFloor,
