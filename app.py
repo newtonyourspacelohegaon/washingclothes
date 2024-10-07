@@ -90,7 +90,9 @@ def handle_form():
                 tempDateSelect=collection.find({"user_id": first_name})[0]["resetDate"]
                 tempDateBooked = collection.find({"user_id": first_name})[0]["dateSelect"]
                 temptimeSelect = collection.find({"user_id": first_name})[0]["timeSelect"]
-                return f"Error: you can book after {tempDateSelect},you have booked the slot for{temptimeSelect} on {tempDateBooked}"
+                tempfloorSelect = collection.find({"user_id": first_name})[0]["floor"]
+                temproomSelect = collection.find({"user_id": first_name})[0]["room"]
+                return f"Error: you can book after {tempDateSelect},you have booked the slot for{temptimeSelect} on {tempDateBooked} of {tempfloorSelect} and {temproomSelect}"
         else:
             result = collection.update_one(
             {'user_id': first_name},
